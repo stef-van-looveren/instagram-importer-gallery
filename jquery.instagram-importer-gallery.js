@@ -52,22 +52,23 @@
         var ItemsPerPage = 24;
 
         $.each(data, function(index, node) {
-          var post = {
-            src: node['field_instagram_image'][0]['url'],
-            link: node['field_instagram_link'][0]['uri'],
-            title:'<div class="pop-up-instagram-card-user-image-container"><a class="instagram-card-user-name" href="https://instagram.com/' + node['field_instagram_username'][0]['value'] + '"><div class="pop-up-instagram-card-user-image"><img src="' + node['field_instagram_avatar'][0]['url'] + '"></div></a></div></div>'+node['title'][0]['value']+' <a target="_blank" href="'+node['field_instagram_link'][0]['uri']+'">'+ Drupal.t('View post') + '</a>',
-            w:800,
-            h:800
-          };
+          if(node['field_instagram_image']) {
+            var post = {
+              src: node['field_instagram_image'][0]['url'],
+              link: node['field_instagram_link'][0]['uri'],
+              title:'<div class="pop-up-instagram-card-user-image-container"><a class="instagram-card-user-name" href="https://instagram.com/' + node['field_instagram_username'][0]['value'] + '"><div class="pop-up-instagram-card-user-image"><img src="' + node['field_instagram_avatar'][0]['url'] + '"></div></a></div></div>'+node['title'][0]['value']+' <a target="_blank" href="'+node['field_instagram_link'][0]['uri']+'">'+ Drupal.t('View post') + '</a>',
+              w:800,
+              h:800
+            };
 
-          var itemIndex = (index+iteration*ItemsPerPage);
-          galleryItems.push(post);
+            var itemIndex = (index+iteration*ItemsPerPage);
+            galleryItems.push(post);
 
-          ig_selector.append(
+            ig_selector.append(
               '<div class="instagram-card instagram-card-item-'+itemIndex+'" style="display:none;" data-index="'+itemIndex+'">' +
               '<div class="instagram-card-header animated fadeIn" style="display:none;">' +
               '<div class="instagram-card-title">' +
-            '<div class="instagram-card-user-image"><img src="' + node['field_instagram_avatar'][0]['url'] + '"></div>' +
+              '<div class="instagram-card-user-image"><img src="' + node['field_instagram_avatar'][0]['url'] + '"></div>' +
               node['title'][0]['value'] +
               '</div>' +
               '</div>' +
@@ -77,6 +78,7 @@
               '</div>'
             );
             $('.instagram-card-item-'+itemIndex).delay(effectTimeOut*index).fadeIn('slow');
+          }
         });
         if(length == 24) {
           ig_selector.after('<span class="ifg-load-more"><span class="ifg-load-more-inner">Load more items</span></span>');
