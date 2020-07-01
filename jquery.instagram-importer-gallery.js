@@ -34,11 +34,11 @@
       };
 
       $(context).once().on('click', '.instagram-card', function (e) {
-        event.preventDefault();
-        var gallery = new PhotoSwipe( pswpElement, InstagramImporterGalleryUiDefault, galleryItems, galleryOptions);
         currentlyViewing = $(this).data('index');
+        galleryOptions.index = parseInt(currentlyViewing); // fix for the da problem!
+        var gallery = new PhotoSwipe(pswpElement, InstagramImporterGalleryUiDefault, galleryItems, galleryOptions);
         gallery.init();
-        gallery.goTo(currentlyViewing);
+        event.preventDefault();
       });
 
       function instagram_gallery_init(data) {
