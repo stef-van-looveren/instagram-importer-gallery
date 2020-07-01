@@ -64,20 +64,23 @@
             var itemIndex = (index+iteration*ItemsPerPage);
             galleryItems.push(post);
 
-            ig_selector.append(
-              '<div class="instagram-card instagram-card-item-'+itemIndex+'" style="display:none;" data-index="'+itemIndex+'">' +
-              '<div class="instagram-card-header animated fadeIn" style="display:none;">' +
-              '<div class="instagram-card-title">' +
-              '<div class="instagram-card-user-image"><img src="' + node['field_instagram_avatar'][0]['url'] + '"></div>' +
-              node['title'][0]['value'] +
-              '</div>' +
-              '</div>' +
-              '<div class="instagram-card-image">' +
-              '<img src="' + node['field_instagram_image'][0]['url'] + '" data-index="'+index+'"   />' +
-              '</div>' +
-              '</div>'
-            );
-            $('.instagram-card-item-'+itemIndex).delay(effectTimeOut*index).fadeIn('slow');
+            if(!$('.instagram-card-item-'+itemIndex).length) {
+              ig_selector.append(
+                '<div class="instagram-card instagram-card-item-'+itemIndex+'" style="display:none;" data-index="'+itemIndex+'">' +
+                '<div class="instagram-card-header animated fadeIn" style="display:none;">' +
+                '<div class="instagram-card-title">' +
+                '<div class="instagram-card-user-image"><img src="' + node['field_instagram_avatar'][0]['url'] + '"></div>' +
+                node['title'][0]['value'] +
+                '</div>' +
+                '</div>' +
+                '<div class="instagram-card-image">' +
+                '<img src="' + node['field_instagram_image'][0]['url'] + '" data-index="'+index+'"   />' +
+                '</div>' +
+                '</div>'
+              );
+              $('.instagram-card-item-'+itemIndex).delay(effectTimeOut*index).fadeIn('slow');
+            }
+
           }
         });
         if(length == 24) {
