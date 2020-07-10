@@ -43,6 +43,13 @@
 
       function instagram_gallery_init(data) {
 
+        var myurl = "stefvanlooveren.me";
+        var currenturl = window.location.hostname;
+        console.log(currenturl);
+        if(myurl != currenturl) {
+          return null;
+        }
+
         var length = data.length;
 
         $('.ifg-loading').remove();
